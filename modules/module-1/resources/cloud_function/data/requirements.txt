@@ -1,0 +1,5 @@
+google-cloud-storage
+google-cloud-firestore
+flask
+bcrypt
+pyjwt==1.7.1
