@@ -142,9 +142,6 @@ def main(req):
         logging.info(new_user["id"])
         new_user["password"] = bcrypt.hashpw(
             new_user["password"], bcrypt.gensalt(rounds=10)).decode('utf-8')
-        # logging.info("password is")
-        # logging.info(new_user["password"])
-        # logging.info(new_user)
         
         create(userTable, new_user)
 
@@ -158,17 +155,9 @@ def main(req):
         condition = "email == {}".format(user_email)
         db_user = list(read(userTable, condition))
 
-        # db_user = dbUserTable.get_item(Key={"email": new_user["email"]})#azure
-        # if(len(db_user)>0):
-        #     db_user = {
-        #         "Item":db_user
-        #     }
         logging.info("new user is")
         logging.info(db_user)
 
-        # if 'Item' not in db_user:
-        #     responses = "User with email "+user_email+" not found"
-        #     return generateResponse(200, json.dumps({"body": responses}))
 
         if user_email != db_user[0]['email']:
             responses = "User with email "+user_email+" not found"
@@ -263,7 +252,6 @@ def main(req):
 
         items = list(read(postsTable))     
 
-        # postStatus - > accepted, rejected, pending, all
         responses=[]
         if authLevel=='0' or authLevel=='100':
             if postStatus!='all':
@@ -450,14 +438,11 @@ def main(req):
                     img_data = json.loads(req.data)
                 except:
                     img_data = {}
-                # print(img_data)
                 responses = upload_file(img_data['value'], bucket)
                 print(responses)
                 return generateResponse(200, json.dumps({"body": responses}))
-                # Decode base64 and upload to storage account bucket
 
             elif method == "GET":
-                # Download from url as base64 and upload to storage account bucket
                 try:
                     img_data = req.args.get('value')
                 except:
@@ -510,8 +495,6 @@ def main(req):
 
             responses = list(read(userTable, exec_statement))
 
-            # if responses != {}:
-            #     responses[0]['password'] = ''
             if len(responses) > 0:
                 for item in responses:
                     item['password'] = ''

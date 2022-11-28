@@ -1,5 +1,5 @@
-google-cloud-storage
-google-cloud-firestore
-flask
-bcrypt
+google-cloud-storage==2.6.0
+google-cloud-firestore==2.7.2
+flask==2.2.2
+bcrypt==4.0.1
 pyjwt==1.7.1

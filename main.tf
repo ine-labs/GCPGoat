@@ -24,6 +24,7 @@ provider "google" {
 
 resource "google_storage_bucket" "data_bucket" {
   name          = "prod-blogapp-${random_id.bucket_prefix.hex}"
+  force_destroy = true
   project       = google_project.my_project.project_id
   location      = "US"
   storage_class = "STANDARD"
@@ -34,6 +35,7 @@ resource "google_storage_bucket" "data_bucket" {
 # Prod Bucket
 resource "google_storage_bucket" "dev_bucket" {
   name          = "dev-blogapp-${random_id.bucket_prefix.hex}"
+  force_destroy = true
   project       = google_project.my_project.project_id
   location      = "US"
   storage_class = "STANDARD"
@@ -485,6 +487,7 @@ resource "google_firestore_document" "blog_post_9" {
 
 resource "google_storage_bucket" "function_bucket" {
   name          = "function-bucket-${random_id.bucket_prefix.hex}"
+  force_destroy = true
   project       = google_project.my_project.project_id
   location      = "US"
   storage_class = "STANDARD"
@@ -598,9 +601,6 @@ resource "google_cloudfunctions_function_iam_member" "backend-invoker" {
 }
 
 
-# Deploy frontend
-# 1) Replace the API URL 
-# 2) Deploy the app
 
 resource "google_storage_bucket" "blog" {
   name          = "blog-bucket-${random_id.bucket_prefix.hex}"
@@ -682,6 +682,7 @@ data "archive_file" "file_function_app" {
 
 resource "google_storage_bucket" "bucket" {
   project       = google_project.my_project.project_id
+  force_destroy = true
   name     = "blog-frontend-${random_id.bucket_prefix.hex}"
   location = "US"
   uniform_bucket_level_access = true
@@ -849,7 +850,7 @@ EOF
 resource "google_service_account" "sa" {
   account_id   = "admin-service-account"
   project       = google_project.my_project.project_id
-  display_name = "A service account that only Jane can use"
+  display_name = "A service account for admin"
 }
 
 resource "google_project_iam_member" "owner_binding" {
@@ -882,6 +883,23 @@ resource "google_compute_instance" "vm_instance_admin" {
   depends_on = [
     google_project_service.gcp-serv,
     google_service_account.sa
+  ]
+}
+
+resource "null_resource" "file_replacement_rollback" {
+  provisioner "local-exec" {
+    command     = <<EOF
+sed -i 's/"https:\/\/storage\.googleapis\.com\/${google_storage_bucket.data_bucket.name}\/webfiles\/build\/static/"\/static/g' modules/module-1/resources/storage_bucket/webfiles/build/static/js/main.adc6b28e.js
+sed -i 's`${google_cloudfunctions_function.backend-function.https_trigger_url}`CLOUD_FUNCTION_URL`' modules/module-1/resources/storage_bucket/webfiles/build/static/js/main.adc6b28e.js
+sed -i 's`${google_compute_instance.vm_instance_public.network_interface.0.access_config.0.nat_ip}`VM_IP_ADDR`' modules/module-1/resources/storage_bucket/shared/files/.ssh/config.txt
+EOF
+    interpreter = ["/bin/bash", "-c"]
+  }
+  depends_on = [
+    google_storage_bucket_object.zip,
+    google_storage_bucket_object.data,
+    google_storage_bucket_object.dev-data,
+    google_storage_bucket_object.object,
   ]
 }
 
