@@ -84,6 +84,11 @@ Escalation Path:
 
 **Recommended Browser:** Google Chrome
 
+# Pricing
+The resources created with the deployment of GCPGoat will not incur any charges if the AWS account is under the free tier/trial period. However, upon exhaustion/ineligibility of the free tier/trial, the following charges will apply for the US-East region:
+
+Module 1: $0.03/hour
+
 # Contributors
 
 Nishant Sharma, Director, Lab Platform, INE <nsharma@ine.com>

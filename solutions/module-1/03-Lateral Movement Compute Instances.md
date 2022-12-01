@@ -8,7 +8,7 @@ We will find the credential for a low privileged virtual machine instance from t
 
 ![](https://user-images.githubusercontent.com/54552051/204803801-bfa0ab6c-402b-4321-8342-71bd893941b0.png)
 
-![](https://user-images.githubusercontent.com/54552051/204803856-29420dc8-6312-4afe-98bb-bc4332ed8b28.png)
+![](https://user-images.githubusercontent.com/54552051/205142814-573502ad-3ec6-4809-bee3-65feb557275c.png)
 
 In the bucket contents, you will find an interesting file named **config.txt** as highlighted in the above image. Copy the relative path for the file. There are some key files also in the same directory.
 
@@ -18,7 +18,7 @@ In the bucket contents, you will find an interesting file named **config.txt** a
 https://storage.googleapis.com/<DEV BUCKET NAME>/shared/files/.ssh/config.txt
 ```
 
-![](https://user-images.githubusercontent.com/54552051/204803864-7e7c4f8d-6af7-4614-a6bc-36c5f3814a0a.png)
+![](https://user-images.githubusercontent.com/54552051/205142819-b7995b20-e022-4bea-acbe-ff7b2e2e29d9.png)
 
 Here you will find multiple IPs with some users and their SSH key relative paths.
 
@@ -30,13 +30,13 @@ nmap <IP_ADDR> -Pn
 
 **Note:** Replace the IP_ADDR with the host IPs found in the config file.
 
-![](https://user-images.githubusercontent.com/54552051/204803868-e501e087-61df-4033-9ad5-1f6a96fc8892.png)
+![](https://user-images.githubusercontent.com/54552051/205142823-790fa47b-7e97-4560-8e96-beec334fb8f7.png)
 
 One of the IP addresses will have port 22 open.
 
 If you match this IP address in the config file, it will be for the user **justin**. 
 
-![](https://user-images.githubusercontent.com/54552051/204803870-7ed420f1-be67-4a0e-a347-de85b600d0f0.png)
+![](https://user-images.githubusercontent.com/54552051/205142825-2499551e-66e3-42be-ba6e-e4695504a2ca.png)
 
 Copy the relative path for the SSH key.
 
@@ -60,7 +60,7 @@ ssh -i justin.pem justin@<IP_ADDR>
 
 **Note:** Replace IP_ADDR with the IP address corresponding to justin in the config file.
 
-![](https://user-images.githubusercontent.com/54552051/204803878-4eddb718-37db-4863-adc0-81e6396607ae.png)
+![](https://user-images.githubusercontent.com/54552051/205142790-5ef8ec1e-a9b4-4ad1-88e8-0e73d2ad331d.png)
 
 You will be successfully logged into the cloud virtual machine.
 
@@ -70,7 +70,7 @@ You will be successfully logged into the cloud virtual machine.
 gcloud config list
 ```
 
-![](https://user-images.githubusercontent.com/54552051/204803879-4b98c341-2231-4afd-b4bc-bf7c2de7b6a7.png)
+![](https://user-images.githubusercontent.com/54552051/205142797-792178a3-f93c-412f-a1af-f5efcd7aebd8.png)
 
 This VM seems to be using default compute service account. The default service account has **Editor** level access to the project. But often restricted by access scopes.
 
@@ -91,7 +91,7 @@ We don't have full API access on the project, but we do have full access to comp
 gcloud compute instances list
 ```
 
-![](https://user-images.githubusercontent.com/54552051/204803884-8393d6ac-8af2-4b34-bdc4-584fd4230027.png)
+![](https://user-images.githubusercontent.com/54552051/205142799-4fd6f317-ab28-4a53-8cbd-284c3977ca8a.png)
 
 Here we have another VM inside the project named as **admin-vm**. Note down the public IP address for the admin VM.
 
@@ -138,7 +138,7 @@ Hit **Y** if asked for the zone of the instance.
 gcloud compute instances describe admin-vm --zone us-west1-c
 ```
 
-![](https://user-images.githubusercontent.com/54552051/204803895-167d63da-42a7-4bf6-8c61-a28f4e6ce93a.png)
+![](https://user-images.githubusercontent.com/54552051/205142802-68bd0835-4aa1-45e3-b765-3f8fd6658c92.png)
 
 ![](https://user-images.githubusercontent.com/54552051/204803896-d619b6c8-832f-42f7-bdfd-cfef28a7da51.png)
 
@@ -152,7 +152,7 @@ ssh -i ./key attacker@<IP_ADDR>
 
 **Note:** Replace the IP_ADDR with the public IP of admin-vm instance.
 
-![](https://user-images.githubusercontent.com/54552051/204803902-d2fb6393-ce11-4ef7-9aa9-0f0e143c908d.png)
+![](https://user-images.githubusercontent.com/54552051/205142808-5856c012-81ba-4c71-870d-9cfe765a0612.png)
 
 You will be successfully logged in to the admin-vm with the attacker user. By default, the user will have sudo access as it was added through the metadata of this instance.
 
@@ -162,7 +162,7 @@ You will be successfully logged in to the admin-vm with the attacker user. By de
 gcloud config list
 ```
 
-![](https://user-images.githubusercontent.com/54552051/204803906-c4406f82-89f3-478f-8b24-ae34ed8c9940.png)
+![](https://user-images.githubusercontent.com/54552051/205142811-e886d5a9-a815-4696-8ad3-f8fe72284273.png)
 
 A service account named **admin-service-account** is attached to this instance. Note down the project name.
 
@@ -204,4 +204,4 @@ This command will add the current user to the admin-vm instance by modifying the
 
 You are now logged in to the admin-vm with user **justin**.
 
-This method seems very easy but can trigger some alerts as a new user and ssh key are added to the VM. By using the previous method you can simply change the SSH keys of any existing user. Thus creating less noise in the environment.
+This method seems very easy but can trigger some alerts as a new user and ssh key are added to the VM. By using the previous method you can also change the SSH keys of any existing user. Thus creating less noise in the environment.

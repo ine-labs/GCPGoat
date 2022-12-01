@@ -4,17 +4,11 @@ We will try to use the misconfigured bucket policies to get admin access on one 
 
 # Solution
 
-**Step 1:** Open the web application put in the login credentials and start interacting with the web app.
-
-![](https://user-images.githubusercontent.com/54552051/204803754-091bc173-00b8-4151-b126-4e5f92af98a4.png)
-
-![](https://user-images.githubusercontent.com/54552051/204803761-4c1deef3-bb2b-4f44-94be-b41b0dd45a6b.png)
-
-**Step 2:** Open any of the blogs from the home page.
+**Step 1:** Open any of the blogs from the home page.
 
 ![](https://user-images.githubusercontent.com/54552051/204803763-0a423523-f7a9-429c-bc74-2bed9d44515b.png)
 
-Open the image of the blog in the new tab by right-clicking on it and following the same.
+**Step 2:** Open the image of the blog in the new tab by right-clicking on it and following the same.
 
 ![](https://user-images.githubusercontent.com/54552051/204803768-7492553d-80f5-42d7-bea9-df0f5af2fe1c.png)
 
@@ -30,7 +24,7 @@ You can find the name of the bucket as highlighted in the above image, after the
 https://storage.googleapis.com/<BUCKET NAME>
 ```
 
-**Note:** Replace the <BUCKET NAME> with your current bucket name.
+**Note:** Replace the ``<BUCKET NAME>`` with your current bucket name.
 
 ![](https://user-images.githubusercontent.com/54552051/204803773-730a08ef-ee34-4af3-92c5-eef0aa06687e.png)
 
@@ -46,7 +40,7 @@ https://www.googleapis.com/storage/v1/b/BUCKET_NAME/iam/testPermissions?permissi
 
 The Google Storage TestIamPermissionsAPI allows us to supply a bucket name and list of Google Storage permissions, and it will respond with the permissions we have on that bucket. This completely bypasses the requirement of viewing the bucket policy and could potentially even give us better information (in the case of a custom role being used).
 
-![](https://user-images.githubusercontent.com/54552051/204803776-434646aa-816b-4fc8-98d9-1792f6072711.png)
+![](https://user-images.githubusercontent.com/54552051/205140535-cadccbfe-7e3f-49f2-b64f-034f150d187d.png)
 
 This bucket only has read access which is "storage.buckets.get". But the bucket name is starting from **prod** so there can be a dev bucket also.
 
@@ -85,7 +79,7 @@ Use the following command to list all IAM permissions and roles attached to this
 gsutil iam get gs://<BUCKET NAME>
 ```
 
-![](https://user-images.githubusercontent.com/54552051/204803786-df0d5b6f-c7b1-4d1e-a884-a71184dfa967.png)
+![](https://user-images.githubusercontent.com/54552051/205140775-2c54603e-3d3f-46da-960d-74e0a1d0cdf2.png)
 
 Here allUsers which is for anonymous user has a custom role attached to them. Which had those 3 permissions we saw in the previous step.
 
@@ -95,7 +89,7 @@ Here allUsers which is for anonymous user has a custom role attached to them. Wh
 gsutil iam ch allUsers:admin gs://<BUCKET NAME>
 ```
 
-![](https://user-images.githubusercontent.com/54552051/204803788-f6109fa8-c8d9-443e-8dd4-d8e548c04096.png)
+![](https://user-images.githubusercontent.com/54552051/205140776-822b1a81-029b-40d0-82a0-93a8079da37a.png)
 
 **Step 10:** Again list the IAM roles attached to the bucket to confirm that admin roles are added to it using the gsutil tool.
 
@@ -103,7 +97,7 @@ gsutil iam ch allUsers:admin gs://<BUCKET NAME>
 gsutil iam get gs://<BUCKET NAME>
 ```
 
-![](https://user-images.githubusercontent.com/54552051/204803791-e2d36f01-9e11-4c62-8748-78b3fb0d9b16.png)
+![](https://user-images.githubusercontent.com/54552051/205140777-64b74db0-ac2f-4d72-8ae2-84380bf8fb7c.png)
 
 Successfully added an admin role for all users.
 
@@ -113,9 +107,9 @@ Successfully added an admin role for all users.
 https://www.googleapis.com/storage/v1/b/BUCKET_NAME/iam/testPermissions?permissions=storage.buckets.delete&permissions=storage.buckets.get&permissions=storage.buckets.getIamPolicy&permissions=storage.buckets.setIamPolicy&permissions=storage.buckets.update&permissions=storage.objects.create&permissions=storage.objects.delete&permissions=storage.objects.get&permissions=storage.objects.list&permissions=storage.objects.update
 ```
 
-Note: replace BUCKET_NAME with your dev bucket name.
+Note: replace ``<BUCKET_NAME>`` with your dev bucket name.
 
-![](https://user-images.githubusercontent.com/54552051/204803798-c39a7bab-0380-49d2-86cb-acd600203172.png)
+![](https://user-images.githubusercontent.com/54552051/205140767-53c1574c-8ffe-49c8-8e3c-dd6572826b0e.png)
 
 You can see now we have all kinds of access to this bucket.
 
