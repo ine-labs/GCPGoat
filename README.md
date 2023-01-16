@@ -8,6 +8,12 @@ Compromising an organization's cloud infrastructure is like sitting on a gold mi
 
 GCPGoat is a vulnerable by design infrastructure on GCP featuring the latest released OWASP Top 10 web application security risks (2021) and other misconfiguration based on services such as IAM, Storage Bucket, Cloud Functions and Compute Engine. GCPGoat mimics real-world infrastructure but with added vulnerabilities. It features multiple escalation paths and is focused on a black-box approach.
 
+GCPGoat uses IaC (Terraform) to deploy the vulnerable cloud infrastructure on the user's GCP account. This gives the user complete control over code, infrastructure, and environment. Using GCPGoat, the user can learn/practice:
+- Cloud Pentesting/Red-teaming
+- Auditing IaC
+- Secure Coding
+- Detection and mitigation
+
 The project will be divided into modules and each module will be a separate web application, powered by varied tech stacks and development practices. It will leverage IaC through terraform to ease the deployment process.
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fine-labs%2FGCPGoat&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
