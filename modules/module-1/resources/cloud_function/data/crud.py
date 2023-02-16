@@ -1,5 +1,7 @@
-from google.cloud import firestore
 import os
+
+from google.cloud import firestore
+
 
 def create(firestore_collection, value, document = None, merge_values = True): 
   try:
