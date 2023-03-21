@@ -112,6 +112,9 @@ Litesh Ghute, Software Engineer (Cloud), INE <lghute@ine.com>
 
 Sanjeev Mahunta, Software Engineer (Cloud), INE <smahunta@ine.com>
 
+# Solutions
+
+The offensive manuals are available in the [attack-manuals](attack-manuals/) directory, and the defensive manuals are available in the [defence-manuals](defence-manuals/) directory. 
 
 # Screenshots
 
