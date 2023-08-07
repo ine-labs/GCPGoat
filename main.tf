@@ -771,10 +771,10 @@ resource "google_compute_firewall" "allow-ssh" {
   target_tags   = ["ssh"]
 }
 
-variable "ubuntu_1804_sku" {
+variable "ubuntu_2204_sku" {
   type        = string
-  description = "SKU for Ubuntu 18.04 LTS"
-  default     = "ubuntu-os-cloud/ubuntu-1804-lts"
+  description = "SKU for Ubuntu 22.04 LTS"
+  default     = "ubuntu-os-cloud/ubuntu-2204-lts"
 }
 
 variable "linux_instance_type" {
@@ -817,7 +817,7 @@ resource "google_compute_instance" "vm_instance_public" {
   tags         = ["ssh"]
   boot_disk {
     initialize_params {
-      image = var.ubuntu_1804_sku
+      image = var.ubuntu_2204_sku
     }
   }
   metadata_startup_script = data.template_file.linux-metadata.rendered
@@ -869,7 +869,7 @@ resource "google_compute_instance" "vm_instance_admin" {
   tags         = ["ssh"]
   boot_disk {
     initialize_params {
-      image = var.ubuntu_1804_sku
+      image = var.ubuntu_2204_sku
     }
   }
   network_interface {
