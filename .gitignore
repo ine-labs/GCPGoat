@@ -1,0 +1,6 @@
+.terraform.lock.hcl
+.terraform/
+frontend-source.zip
+function.zip
+terraform.tfstate
+terraform.tfstate.backup
