@@ -18,6 +18,10 @@ The project will be divided into modules and each module will be a separate web 
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fine-labs%2FGCPGoat&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
+### Presented at
+
+* [BlackHat ASIA 2023](https://www.blackhat.com/asia-23/arsenal/schedule/index.html#gcpgoat--a-damn-vulnerable-gcp-infrastructure-31312)
+
 ### Developed with :heart: by [INE](https://ine.com/) 
 
 [<img src="https://user-images.githubusercontent.com/25884689/184508144-f0196d79-5843-4ea6-ad39-0c14cd0da54c.png" alt="drawing" width="200"/>](https://discord.gg/TG7bpETgbg)
