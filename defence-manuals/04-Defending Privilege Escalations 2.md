@@ -242,7 +242,7 @@ A Virtual machine named **developer-vm** is listed.
 
 A Virtual machine named **admin-vm** is listed.
 
-**Step 20:** Navigate back to GCP console and go to cloud functions page and click on the notifiaction handler function.
+**Step 20:** Navigate back to GCP console and go to cloud functions page and click on the notification handler function.
 
 ![21](images/defending-privilege-escalations-2/21.png)
 
