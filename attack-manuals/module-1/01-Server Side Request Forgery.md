@@ -21,7 +21,7 @@ In the "Enter URL of image" field, write down the below-mentioned payload.
 Payload:
 
 ```
-file:///etc/passwd/
+file:///etc/passwd
 ```
 
 **Step 3:** First, right-click on the screen and you will find inspect elements, click on that and open the "Network" tab. After that, click on the "Upload" button.
