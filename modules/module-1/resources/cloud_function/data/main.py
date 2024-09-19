@@ -59,7 +59,7 @@ def generate_auth(userInfo):
 
 def auth_is_valid(req):
     JWT_SECRET = ''
-    JWT_TOKEN = req.headers.get('JWT_TOKEN') or req.headers.get('jwt_token')
+    JWT_TOKEN = req.headers.get('JWT-TOKEN') or req.headers.get('jwt-token')
     if JWT_TOKEN != '':
         JWT_SECRET = os.environ['JWT_SECRET']
         try:

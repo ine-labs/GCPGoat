@@ -5,6 +5,6 @@ export default axios.create({
   baseURL: "CLOUD_FUNCTION_URL",
   headers: {
     "Content-type": "application/json",
-    "JWT_TOKEN": getToken(),
+    "jwt-token": getToken(),
   }
 });
