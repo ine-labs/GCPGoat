@@ -10,6 +10,7 @@ resource "google_project" "my_project" {
   name            = "Gcp-Goat"
   project_id      = "gcp-goat-${random_id.bucket_prefix.hex}"
   billing_account = data.google_billing_account.acct.id
+  deletion_policy = "DELETE"
 }
 
 variable "region" {
@@ -568,7 +569,7 @@ resource "google_storage_bucket_object" "zip" {
 # Create the Cloud function triggered by a `Finalize` event on the bucket
 resource "google_cloudfunctions_function" "backend-function" {
   name    = "backend-function"
-  runtime = "python37"
+  runtime = "python310"
 
   source_archive_bucket = google_storage_bucket.function_bucket.name
   source_archive_object = google_storage_bucket_object.zip.name
@@ -700,7 +701,7 @@ resource "google_storage_bucket_object" "object" {
 # Create Cloud Function
 resource "google_cloudfunctions_function" "function" {
   name                  = "blogapp-${random_id.bucket_prefix.hex}"
-  runtime               = "nodejs12" # Switch to a different runtime if needed
+  runtime               = "nodejs20" # Switch to a different runtime if needed
   project               = google_project.my_project.project_id
   available_memory_mb   = 128
   source_archive_bucket = google_storage_bucket.bucket.name
